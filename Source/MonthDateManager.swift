@@ -20,15 +20,13 @@ final class MonthDateManager {
     }
     // ViewModel
     func hilightModel(for date: Date) {
+        (0..<models.count).forEach { models[$0].shouldHilight = false }
         for i in 0..<models.count {
             if let day = days[i] {
                 if day.string(format: "yyyymmdd") == date.string(format: "yyyymmdd") {
                     models[i].shouldHilight = true
-                } else {
-                    models[i].shouldHilight = false
+                    break
                 }
-            } else {
-                 models[i].shouldHilight = false
             }
         }
     }
