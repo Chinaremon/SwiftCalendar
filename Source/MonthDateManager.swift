@@ -8,6 +8,11 @@
 
 import Foundation
 
+
+protocol MonthDateManagerDelegate: AnyObject {
+//    func didUpdateModel(_)
+}
+
 final class MonthDateManager {
     
     var didSelectDate: ((Date) -> ())?
@@ -19,7 +24,7 @@ final class MonthDateManager {
         }
     }
     // ViewModel
-    func hilightModel(for date: Date) {
+    private func hilightModel(for date: Date) {
         (0..<models.count).forEach { models[$0].shouldHilight = false }
         for i in 0..<models.count {
             if let day = days[i] {
@@ -59,10 +64,16 @@ final class MonthDateManager {
         prevMonth()
         selectedDate = Calendar.current.date(byAdding: .month, value: -1, to: selectedDate)!
     }
+    
+    func selectDate(at indexPath: IndexPath) {
+        if let date = days[indexPath.row] {
+            selectedDate = date
+        }
+    }
     //
     private let calendar = Calendar.current
     private (set) var days: [Date?] = []
-    private (set) var firstDate: Date! {
+    private var firstDate: Date! {
         didSet {
             days = generateDays()
             models = days.map { ($0 != nil) ? DayCell.Model(date: $0!) : DayCell.Model.init()  }
@@ -76,6 +87,16 @@ final class MonthDateManager {
         component.day = 1
         firstDate = calendar.date(from: component)
         days = generateDays()
+        models = days.map { ($0 != nil) ? DayCell.Model(date: $0!) : DayCell.Model.init()  }
+        
+        for i in 0..<models.count {
+            if let day = days[i] {
+                if day.string(format: "yyyymmdd") == selectedDate.string(format: "yyyymmdd") {
+                    models[i].shouldHilight = true
+                    break
+                }
+            }
+        }
     }
     
     func generateDays() -> [Date?] {

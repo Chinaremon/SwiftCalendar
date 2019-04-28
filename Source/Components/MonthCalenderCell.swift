@@ -88,11 +88,7 @@ extension MonthGridView: UICollectionViewDelegateFlowLayout {
 extension MonthGridView: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        if let _ = dateManager.days[indexPath.row] {
-            hilightRow(at: indexPath.row)
-            delegate?.didSelectDate(at: indexPath)
-        }
+        delegate?.didSelectDate(at: indexPath)
     }
 }
 

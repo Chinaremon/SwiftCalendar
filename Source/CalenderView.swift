@@ -83,9 +83,7 @@ extension CalenderView: TopViewDelegate {
 extension CalenderView: MonthGridViewDelegate {
     
     func didSelectDate(at indexPath: IndexPath) {
-        if let date = viewModel.days[indexPath.row] {
-            viewModel.selectedDate = date
-        }
+        viewModel.selectDate(at: indexPath)
     }
 }
 
