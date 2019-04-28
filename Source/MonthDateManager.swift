@@ -10,16 +10,15 @@ import Foundation
 
 final class MonthDateManager {
     
-    
     // ViewModel
     
     //
-
     private let calendar = Calendar.current
     private (set) var days: [Date?] = []
     private (set) var firstDate: Date! {
         didSet {
-            updateModel()
+            days = generateDays()
+            models = days.map { ($0 != nil) ? DayCell.Model(date: $0!) : DayCell.Model.init()  }
         }
     }
     
@@ -29,32 +28,29 @@ final class MonthDateManager {
         var component = calendar.dateComponents([.year, .month], from: Date())
         component.day = 1
         firstDate = calendar.date(from: component)
-        updateModel()
+        days = generateDays()
     }
     
-    func updateModel() {
-        days.removeAll()
+    func generateDays() -> [Date?] {
         // 月の初日の曜日
         let dayOfTheWeek = calendar.component(.weekday, from: firstDate) - 1
         // 月の日数
         let dayCount = calendar.range(of: .day, in: .month, for: firstDate)!.count
-        
+        // 月の週の数
         let weakCount = calendar.range(of: .weekOfMonth, in: .month, for: firstDate)!.count
         
         let numberOfItems = weakCount * 7
         
-        (0..<numberOfItems).forEach { i in
+        return (0..<numberOfItems).map { i in
             if (0..<dayCount).contains(i-dayOfTheWeek) {
                 var dateComponents = DateComponents()
                 dateComponents.day = i - dayOfTheWeek
                 let date = calendar.date(byAdding: dateComponents, to: firstDate)!
-                days.append(date)
+                return date
             } else {
-                days.append(nil)
+                return nil
             }
         }
-        
-        models = days.map { ($0 != nil) ? DayCell.Model(date: $0!) : DayCell.Model.init()  }
     }
     
     func nextMonth() {

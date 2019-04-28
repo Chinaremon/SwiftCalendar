@@ -70,7 +70,6 @@ final class CalenderView: BaseView {
         if sender.direction == .left {
             goToNextDay()
         } else if sender.direction == .right {
-            // go back to prev day
             goBackPrevDay()
         }
     }
@@ -121,8 +120,6 @@ extension CalenderView: MonthGridViewDelegate {
         }
     }
 }
-
-
 
 
 final class ViewModel {
