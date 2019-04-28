@@ -19,28 +19,22 @@ final class CalenderView: BaseView {
     private let topView = TopView()
     private let weekView = WeekDayView()
     private (set) lazy var monthGridView: MonthGridView = {
-        let it = MonthGridView(dateManager: dateManager)
+        let it = MonthGridView(dateManager: viewModel)
         it.delegate = self
         return it
     }()
 
-    private let dateManager = MonthDateManager()
-    
-    var selectedDate: Date = Date() {
-        didSet {
-            for i in 0..<dateManager.models.count {
-                if let date = dateManager.days[i] {
-                    if date.string(format: "yyyymmdd") == selectedDate.string(format: "yyyymmdd") {
-                        dateManager.models[i].shouldHilight = true
-                    }
-                }
-            }
-            topView.setTitle(selectedDate.string(format: "yyyy/MM/dd"))
-            monthGridView.hilightDate(selectedDate)
-            delegate?.didSelectDate(selectedDate)
+    private lazy var viewModel: MonthDateManager = {
+        let it = MonthDateManager()
+        it.didSelectDate = { [weak self] date in
+            self?.topView.setTitle(date.string(format: "yyyy/MM/dd"))
+            self?.monthGridView.hilightDate(date)
+            self?.delegate?.didSelectDate(date)
+            self?.monthGridView.reloadData()
         }
-    }
-
+        return it
+    }()
+    
     override func initializeView() {
         topView.delegate = self
         addSubview(topView)
@@ -68,60 +62,31 @@ final class CalenderView: BaseView {
 
     @objc private func actionSwipe(_ sender: UISwipeGestureRecognizer) {
         if sender.direction == .left {
-            goToNextDay()
+            viewModel.goToNextDay()
         } else if sender.direction == .right {
-            goBackPrevDay()
+            viewModel.goToPrevDay()
         }
-    }
-    
-    private func goToNextDay() {
-        let nextDay = Calendar.current.date(byAdding: .day
-            , value: 1, to: selectedDate)!
-        if Calendar.current.compare(nextDay, to: selectedDate, toGranularity: .month).rawValue == 1 {
-            dateManager.nextMonth()
-            monthGridView.reloadData()
-        }
-        selectedDate = nextDay
-    }
-    
-    private func goBackPrevDay() {
-
-        let prevDay = Calendar.current.date(byAdding: .day
-            , value: -1, to: selectedDate)!
-
-        if Calendar.current.compare(prevDay, to: selectedDate, toGranularity: .month).rawValue == -1 {
-            dateManager.prevMonth()
-            monthGridView.reloadData()
-        }
-        selectedDate = prevDay
     }
 }
 
 extension CalenderView: TopViewDelegate {
     
     func didTapBack() {
-        dateManager.prevMonth()
-        selectedDate = Calendar.current.date(byAdding: .month, value: -1, to: selectedDate)!
-        monthGridView.reloadData()
+        viewModel.goBackToPrevMonth()
     }
     
     func didTapNext() {
-        dateManager.nextMonth()
-         selectedDate = Calendar.current.date(byAdding: .month, value: 1, to: selectedDate)!
-        monthGridView.reloadData()
+        viewModel.goToNextMonth()
     }
 }
 
 extension CalenderView: MonthGridViewDelegate {
     
     func didSelectDate(at indexPath: IndexPath) {
-        if let date = dateManager.days[indexPath.row] {
-            selectedDate = date
+        if let date = viewModel.days[indexPath.row] {
+            viewModel.selectedDate = date
         }
     }
 }
 
 
-final class ViewModel {
-    
-}

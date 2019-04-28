@@ -10,8 +10,57 @@ import Foundation
 
 final class MonthDateManager {
     
+    var didSelectDate: ((Date) -> ())?
+
+    var selectedDate: Date = Date() {
+        didSet {
+            hilightModel(for: selectedDate)
+            didSelectDate?(selectedDate)
+        }
+    }
     // ViewModel
+    func hilightModel(for date: Date) {
+        for i in 0..<models.count {
+            if let day = days[i] {
+                if day.string(format: "yyyymmdd") == date.string(format: "yyyymmdd") {
+                    models[i].shouldHilight = true
+                } else {
+                    models[i].shouldHilight = false
+                }
+            } else {
+                 models[i].shouldHilight = false
+            }
+        }
+    }
     
+    func goToNextDay() {
+        let nextDay = Calendar.current.date(byAdding: .day
+            , value: 1, to: selectedDate)!
+        if Calendar.current.compare(nextDay, to: selectedDate, toGranularity: .month).rawValue == 1 {
+            nextMonth()
+        }
+        selectedDate = nextDay
+    }
+    
+    func goToPrevDay() {
+        let prevDay = Calendar.current.date(byAdding: .day
+            , value: -1, to: selectedDate)!
+        
+        if Calendar.current.compare(prevDay, to: selectedDate, toGranularity: .month).rawValue == -1 {
+            prevMonth()
+        }
+        selectedDate = prevDay
+    }
+    
+    func goToNextMonth() {
+        nextMonth()
+        selectedDate = Calendar.current.date(byAdding: .month, value: 1, to: selectedDate)!
+    }
+    
+    func goBackToPrevMonth() {
+        prevMonth()
+        selectedDate = Calendar.current.date(byAdding: .month, value: -1, to: selectedDate)!
+    }
     //
     private let calendar = Calendar.current
     private (set) var days: [Date?] = []
