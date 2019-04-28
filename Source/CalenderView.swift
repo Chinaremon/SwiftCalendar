@@ -28,6 +28,13 @@ final class CalenderView: BaseView {
     
     var selectedDate: Date = Date() {
         didSet {
+            for i in 0..<dateManager.models.count {
+                if let date = dateManager.days[i] {
+                    if date.string(format: "yyyymmdd") == selectedDate.string(format: "yyyymmdd") {
+                        dateManager.models[i].shouldHilight = true
+                    }
+                }
+            }
             topView.setTitle(selectedDate.string(format: "yyyy/MM/dd"))
             monthGridView.hilightDate(selectedDate)
             delegate?.didSelectDate(selectedDate)
@@ -74,14 +81,6 @@ final class CalenderView: BaseView {
         if Calendar.current.compare(nextDay, to: selectedDate, toGranularity: .month).rawValue == 1 {
             dateManager.nextMonth()
             monthGridView.reloadData()
-        
-            // 最初に印をつける
-            for i in 0..<dateManager.days.count {
-                if let _ = dateManager.days[i] {
-                    dateManager.models[i].shouldHilight = true
-                    break
-                }
-            }
         }
         selectedDate = nextDay
     }
@@ -94,14 +93,6 @@ final class CalenderView: BaseView {
         if Calendar.current.compare(prevDay, to: selectedDate, toGranularity: .month).rawValue == -1 {
             dateManager.prevMonth()
             monthGridView.reloadData()
-            // 最初に印をつける
-            for i in 0..<dateManager.days.count {
-                let lastIndex = dateManager.days.count - 1
-                if let _ = dateManager.days[lastIndex - i] {
-                    dateManager.models[lastIndex - i].shouldHilight = true
-                    break
-                }
-            }
         }
         selectedDate = prevDay
     }
@@ -111,14 +102,14 @@ extension CalenderView: TopViewDelegate {
     
     func didTapBack() {
         dateManager.prevMonth()
+        selectedDate = Calendar.current.date(byAdding: .month, value: -1, to: selectedDate)!
         monthGridView.reloadData()
-        topView.setTitle(dateManager.yyyymmString)
     }
     
     func didTapNext() {
         dateManager.nextMonth()
+         selectedDate = Calendar.current.date(byAdding: .month, value: 1, to: selectedDate)!
         monthGridView.reloadData()
-        topView.setTitle(dateManager.yyyymmString)
     }
 }
 
@@ -129,11 +120,11 @@ extension CalenderView: MonthGridViewDelegate {
             selectedDate = date
         }
     }
-    
-    func hoge() {
-        monthGridView.hilightDate(dateManager.firstDate)
-    }
 }
 
 
 
+
+final class ViewModel {
+    
+}

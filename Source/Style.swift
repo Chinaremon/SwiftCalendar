@@ -10,7 +10,7 @@
 import UIKit.UIColor
 
 struct Style {
-    static var themeColor = UIColor(red: 255/255, green: 132/255, blue: 214/255, alpha: 1)
+    static var themeColor = UIColor(red: 49/255, green: 215/255, blue: 224/255, alpha: 1)
     static let satuadayColor = UIColor(red: 92.0 / 255, green: 192.0 / 255, blue: 210.0 / 255, alpha: 1.0)
     static let sundayColor = UIColor(red: 195.0 / 255, green: 123.0 / 255, blue: 175.0 / 255, alpha: 1.0)
 

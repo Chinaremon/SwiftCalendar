@@ -10,12 +10,11 @@ import Foundation
 
 final class MonthDateManager {
     
-    var yyyymmString: String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "YYYY/MM"
-        return formatter.string(from: firstDate)
-    }
     
+    // ViewModel
+    
+    //
+
     private let calendar = Calendar.current
     private (set) var days: [Date?] = []
     private (set) var firstDate: Date! {

@@ -34,9 +34,9 @@ class ViewController: UIViewController {
         view.backgroundColor = UIColor.groupTableViewBackground
     }
     
-    
     override func viewDidAppear(_ animated: Bool) {
-        calenderView.hoge()
+        super.viewDidAppear(animated)
+        calenderView.selectedDate = Date()
     }
     
 }
