@@ -25,6 +25,11 @@ final class MonthDateManager {
 
     var selectedDate: Date = Date() {
         didSet {
+            if calendar.compare(oldValue, to: selectedDate, toGranularity: .month).rawValue != 0 {
+                days = generateDays()
+                models = days.map { ($0 != nil) ? DayCell.Model(date: $0!) : DayCell.Model.init()  }
+            }
+            
             title = selectedDate.string(format: "yyyy/MM/dd")
             hilightModel(for: selectedDate)
             bindDelegate?.selectedDate(selectedDate)
@@ -46,29 +51,20 @@ final class MonthDateManager {
     func goToNextDay() {
         let nextDay = Calendar.current.date(byAdding: .day
             , value: 1, to: selectedDate)!
-        if Calendar.current.compare(nextDay, to: selectedDate, toGranularity: .month).rawValue == 1 {
-            nextMonth()
-        }
         selectedDate = nextDay
     }
     
     func goToPrevDay() {
         let prevDay = Calendar.current.date(byAdding: .day
             , value: -1, to: selectedDate)!
-        
-        if Calendar.current.compare(prevDay, to: selectedDate, toGranularity: .month).rawValue == -1 {
-            prevMonth()
-        }
         selectedDate = prevDay
     }
     
     func goToNextMonth() {
-        nextMonth()
         selectedDate = Calendar.current.date(byAdding: .month, value: 1, to: selectedDate)!
     }
     
     func goBackToPrevMonth() {
-        prevMonth()
         selectedDate = Calendar.current.date(byAdding: .month, value: -1, to: selectedDate)!
     }
     
@@ -80,33 +76,17 @@ final class MonthDateManager {
     //
     private let calendar = Calendar.current
     private var days: [Date?] = []
-    private var firstDate: Date! {
-        didSet {
-            days = generateDays()
-            models = days.map { ($0 != nil) ? DayCell.Model(date: $0!) : DayCell.Model.init()  }
-        }
-    }
     
     var models: [DayCell.Model] = []
     
     init() {
-        var component = calendar.dateComponents([.year, .month], from: Date())
-        component.day = 1
-        firstDate = calendar.date(from: component)
-        days = generateDays()
-        models = days.map { ($0 != nil) ? DayCell.Model(date: $0!) : DayCell.Model.init()  }
-        
-        for i in 0..<models.count {
-            if let day = days[i] {
-                if day.string(format: "yyyymmdd") == selectedDate.string(format: "yyyymmdd") {
-                    models[i].shouldHilight = true
-                    break
-                }
-            }
-        }
     }
     
     func generateDays() -> [Date?] {
+        
+        var component = calendar.dateComponents([.year, .month], from: selectedDate)
+        component.day = 1
+        let firstDate = calendar.date(from: component)!
         // 月の初日の曜日
         let dayOfTheWeek = calendar.component(.weekday, from: firstDate) - 1
         // 月の日数
@@ -126,14 +106,6 @@ final class MonthDateManager {
                 return nil
             }
         }
-    }
-    
-    func nextMonth() {
-        firstDate = calendar.date(byAdding: .month, value: 1, to: firstDate)
-    }
-    
-    func prevMonth() {
-        firstDate = calendar.date(byAdding: .month, value: -1, to: firstDate)
     }
 }
 
