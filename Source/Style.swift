@@ -11,6 +11,10 @@ import UIKit.UIColor
 
 struct Style {
     static var themeColor = UIColor(red: 255/255, green: 132/255, blue: 214/255, alpha: 1)
+    
+    static let satuadayColor = UIColor.blue
+    static let sundayColor = UIColor.red
+
     static var itemHeight: CGFloat = 40
     static let weekViewHeight: CGFloat = 20
     static let topViewHeight: CGFloat = 50

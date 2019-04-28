@@ -8,9 +8,10 @@
 
 import UIKit
 
-
 final class DayCell: UICollectionViewCell {
     
+    private let higlghtColor = Style.themeColor
+
     private var label: UILabel = {
         let it = UILabel()
         it.textAlignment = .center
@@ -46,8 +47,8 @@ final class DayCell: UICollectionViewCell {
 
     var shouldHigiht = false {
         didSet{
-            label.backgroundColor = isSelected ? Style.themeColor : .white
-            label.textColor = isSelected ? .white : model.textColor
+            label.backgroundColor = shouldHigiht ? higlghtColor : .white
+            label.textColor = shouldHigiht ? .white : model.textColor
         }
     }
 }
@@ -66,9 +67,9 @@ extension DayCell.Model {
     init(date: Date) {
         let weekday = Calendar.current.component(.weekday, from: date)
         if weekday == 1 {
-            textColor = .red
+            textColor = Style.sundayColor
         } else if weekday == 7 {
-            textColor = .blue
+            textColor = Style.satuadayColor
         } else {
             textColor = .gray
         }
