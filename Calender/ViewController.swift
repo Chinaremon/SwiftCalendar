@@ -24,7 +24,9 @@ class ViewController: UIViewController {
         view.addSubview(calenderView)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        
+    
+    override func viewDidAppear(_ animated: Bool) {
+         calenderView.hoge()
     }
+
 }

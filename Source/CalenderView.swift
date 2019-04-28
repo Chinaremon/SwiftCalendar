@@ -12,22 +12,22 @@ final class CalenderView: BaseView {
     
     private let topView = TopView()
     private let weekView = WeekDayView()
-    private var collectionView = MonthGridView()
+    private (set) var monthGridView = MonthGridView()
     private let dateManager = MonthDateManager()
     
     override func initializeView() {
         topView.delegate = self
         addSubview(topView)
         addSubview(weekView)
-        addSubview(collectionView)
+        addSubview(monthGridView)
         
-        collectionView.delegate = self
-        collectionView.configure(manager: dateManager)
+        monthGridView.delegate = self
+        monthGridView.configure(manager: dateManager)
 
         [UISwipeGestureRecognizer.Direction.right, .left].forEach {
             let swipe = UISwipeGestureRecognizer(target: self, action: #selector(actionSwipe))
             swipe.direction = $0
-            collectionView.addGestureRecognizer(swipe)
+            monthGridView.addGestureRecognizer(swipe)
         }
     }
     
@@ -35,7 +35,7 @@ final class CalenderView: BaseView {
         topView.chura.layout.top(0).left(0).right(0).height(Style.topViewHeight)
         weekView.chura.layout
             .left(0).top(topView.bottomAnchor).height(Style.weekViewHeight).right(0)
-        collectionView.chura.layout
+        monthGridView.chura.layout
             .top(weekView.bottomAnchor).left(0)
             .right(0).bottom(0)
     }
@@ -53,13 +53,13 @@ extension CalenderView: TopViewDelegate {
     
     func didTapBack() {
         dateManager.prevMonth()
-        collectionView.reloadData()
+        monthGridView.reloadData()
         topView.setTitle(dateManager.yyyymmString)
     }
     
     func didTapNext() {
         dateManager.nextMonth()
-        collectionView.reloadData()
+        monthGridView.reloadData()
         topView.setTitle(dateManager.yyyymmString)
     }
 }
@@ -70,6 +70,10 @@ extension CalenderView: MonthGridViewDelegate {
         if let date = dateManager.days[indexPath.row] {
             topView.setTitle(date.string(format: "yyyy/MM/dd"))
         }
+    }
+    
+    func hoge() {
+        monthGridView.hilightDate(dateManager.firstDate)
     }
 }
 

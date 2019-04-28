@@ -94,18 +94,32 @@ extension MonthGridView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         if let _ = dateManager.days[indexPath.row] {
-            collectionView
-                .visibleCells
-                .compactMap {  $0 as? DayCell }
-                .forEach { cell in
-                    cell.shouldHigiht = false
-            }
-            collectionView
-                .cellForItem(at: indexPath)
-                .flatMap { $0 as? DayCell }?
-                .shouldHigiht = true
-            
+            hilightRow(at: indexPath.row)
             delegate?.didSelectDate(at: indexPath)
         }
     }
 }
+
+extension MonthGridView {
+    
+    private func hilightRow(at index: Int) {
+        let indexPath = IndexPath(row: index, section: 0)
+        collectionView
+            .visibleCells
+            .compactMap {  $0 as? DayCell }
+            .forEach { cell in
+                cell.shouldHigiht = collectionView.indexPath(for: cell)! == indexPath
+        }
+    }
+    
+    func hilightDate(_ date: Date) {
+        // HACK: ここら辺改善の余地あり
+        dateManager.days.enumerated().forEach { index, day in
+            if date.string(format: "yyyymmdd") == day?.string(format: "yyyymmdd") ?? "" {
+                hilightRow(at: index)
+            }
+        }
+    }
+}
+
+
