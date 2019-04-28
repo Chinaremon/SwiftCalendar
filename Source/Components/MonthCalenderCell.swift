@@ -17,12 +17,12 @@ protocol MonthGridViewDelegate: AnyObject {
 final class MonthGridView: BaseView {
 
     weak var delegate: MonthGridViewDelegate?
-    private var dateManager: MonthDateManager!
+    private var viewModel: CalendarViewModel!
     private let itemHeight = Style.itemHeight
     
-    convenience init(dateManager: MonthDateManager) {
+    convenience init(viewModel: CalendarViewModel) {
         self.init(frame: .zero)
-        self.dateManager = dateManager
+        self.viewModel = viewModel
     }
     
     private lazy var collectionView: UICollectionView = {
@@ -56,12 +56,12 @@ extension MonthGridView: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dateManager.models.count
+        return viewModel.models.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DayCell", for: indexPath) as! DayCell
-        cell.configure(model: dateManager.models[indexPath.row])
+        cell.configure(model: viewModel.models[indexPath.row])
         return cell
     }
 }

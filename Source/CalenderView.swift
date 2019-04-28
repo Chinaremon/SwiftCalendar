@@ -19,13 +19,13 @@ final class CalenderView: BaseView {
     private let topView = TopView()
     private let weekView = WeekDayView()
     private (set) lazy var monthGridView: MonthGridView = {
-        let it = MonthGridView(dateManager: viewModel)
+        let it = MonthGridView(viewModel: viewModel)
         it.delegate = self
         return it
     }()
 
-    private lazy var viewModel: MonthDateManager = {
-        let it = MonthDateManager()
+    private lazy var viewModel: CalendarViewModel = {
+        let it = CalendarViewModel()
         it.bindDelegate = self
         return it
     }()

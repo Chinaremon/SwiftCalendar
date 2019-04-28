@@ -14,7 +14,7 @@
 		1BEDEA982274355F000C9C93 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1BEDEA962274355F000C9C93 /* LaunchScreen.storyboard */; };
 		1BEDEAA322743560000C9C93 /* CalenderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEDEAA222743560000C9C93 /* CalenderTests.swift */; };
 		1BEDEAAE22743560000C9C93 /* CalenderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEDEAAD22743560000C9C93 /* CalenderUITests.swift */; };
-		1BEDEAC222749585000C9C93 /* MonthDateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEDEAC122749585000C9C93 /* MonthDateManager.swift */; };
+		1BEDEAC222749585000C9C93 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEDEAC122749585000C9C93 /* DateManager.swift */; };
 		1BEDEAC9227544FC000C9C93 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEDEAC8227544FC000C9C93 /* BaseView.swift */; };
 		1BEDEACB22754977000C9C93 /* CalenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEDEACA22754977000C9C93 /* CalenderView.swift */; };
 		1BEDEAE322758147000C9C93 /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEDEAE222758147000C9C93 /* Layout.swift */; };
@@ -24,6 +24,7 @@
 		1BEDEAF522759EB8000C9C93 /* TopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEDEAF122759EB8000C9C93 /* TopView.swift */; };
 		1BEDEAF722759EDA000C9C93 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEDEAF622759EDA000C9C93 /* Style.swift */; };
 		1BEDEAF922759EFF000C9C93 /* Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEDEAF822759EFF000C9C93 /* Ex.swift */; };
+		1BEDEB12227670E6000C9C93 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEDEB11227670E6000C9C93 /* ViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,7 +58,7 @@
 		1BEDEAA922743560000C9C93 /* CalenderUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalenderUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BEDEAAD22743560000C9C93 /* CalenderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderUITests.swift; sourceTree = "<group>"; };
 		1BEDEAAF22743560000C9C93 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1BEDEAC122749585000C9C93 /* MonthDateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonthDateManager.swift; sourceTree = "<group>"; };
+		1BEDEAC122749585000C9C93 /* DateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
 		1BEDEAC8227544FC000C9C93 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		1BEDEACA22754977000C9C93 /* CalenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderView.swift; sourceTree = "<group>"; };
 		1BEDEAE222758147000C9C93 /* Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layout.swift; sourceTree = "<group>"; };
@@ -67,6 +68,7 @@
 		1BEDEAF122759EB8000C9C93 /* TopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopView.swift; sourceTree = "<group>"; };
 		1BEDEAF622759EDA000C9C93 /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		1BEDEAF822759EFF000C9C93 /* Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ex.swift; sourceTree = "<group>"; };
+		1BEDEB11227670E6000C9C93 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,7 +164,8 @@
 			children = (
 				1BEDEAED22759EB8000C9C93 /* Components */,
 				1BEDEACA22754977000C9C93 /* CalenderView.swift */,
-				1BEDEAC122749585000C9C93 /* MonthDateManager.swift */,
+				1BEDEAC122749585000C9C93 /* DateManager.swift */,
+				1BEDEB11227670E6000C9C93 /* ViewModel.swift */,
 				1BEDEAF622759EDA000C9C93 /* Style.swift */,
 			);
 			path = Source;
@@ -314,8 +317,9 @@
 				1BEDEAF422759EB8000C9C93 /* DayCell.swift in Sources */,
 				1BEDEAF222759EB8000C9C93 /* WeekdayView.swift in Sources */,
 				1BEDEAC9227544FC000C9C93 /* BaseView.swift in Sources */,
-				1BEDEAC222749585000C9C93 /* MonthDateManager.swift in Sources */,
+				1BEDEAC222749585000C9C93 /* DateManager.swift in Sources */,
 				1BEDEACB22754977000C9C93 /* CalenderView.swift in Sources */,
+				1BEDEB12227670E6000C9C93 /* ViewModel.swift in Sources */,
 				1BEDEAF522759EB8000C9C93 /* TopView.swift in Sources */,
 				1BEDEAE322758147000C9C93 /* Layout.swift in Sources */,
 				1BEDEAF922759EFF000C9C93 /* Ex.swift in Sources */,
