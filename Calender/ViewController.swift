@@ -38,5 +38,4 @@ class ViewController: UIViewController {
         super.viewDidAppear(animated)
         calenderView.selectedDate = Date()
     }
-    
 }
