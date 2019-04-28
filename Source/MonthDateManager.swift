@@ -27,10 +27,10 @@ final class MonthDateManager {
     private var title = "" {
         didSet { bindDelegate?.title(title)}
     }
-
-    private var selectedDate = Date() {
+    
+    var selectedDate = Date() {
         didSet {
-            if calendar.compare(oldValue, to: selectedDate, toGranularity: .month).rawValue != 0 {
+            if !dateManager.isEqualMonth(selectedDate, to: oldValue) {
                 updateDayAndModels(for: selectedDate)
             }
             hilightModel(for: selectedDate)
@@ -48,7 +48,7 @@ final class MonthDateManager {
         (0..<models.count).forEach { models[$0].shouldHilight = false }
         for i in 0..<models.count {
             if let day = days[i] {
-                if day.string(format: "yyyyMMdd") == date.string(format: "yyyyMMdd") {
+                if dateManager.isEqual(day, to: date){
                     models[i].shouldHilight = true
                     break
                 }
@@ -59,23 +59,19 @@ final class MonthDateManager {
     // Input
     
     func goToNextDay() {
-        let nextDay = Calendar.current.date(byAdding: .day
-            , value: 1, to: selectedDate)!
-        selectedDate = nextDay
+        selectedDate = dateManager.nextDay(of: selectedDate)
     }
     
     func goToPrevDay() {
-        let prevDay = Calendar.current.date(byAdding: .day
-            , value: -1, to: selectedDate)!
-        selectedDate = prevDay
+        selectedDate = dateManager.prevDay(of: selectedDate)
     }
     
     func goToNextMonth() {
-        selectedDate = Calendar.current.date(byAdding: .month, value: 1, to: selectedDate)!
+        selectedDate = dateManager.nextMonth(of: selectedDate)
     }
     
     func goBackToPrevMonth() {
-        selectedDate = Calendar.current.date(byAdding: .month, value: -1, to: selectedDate)!
+        selectedDate = dateManager.prevMonth(of: selectedDate)
     }
     
     func selectDate(at indexPath: IndexPath) {
@@ -90,6 +86,30 @@ struct DateManager {
     
     private let calendar = Calendar.current
 
+    func nextDay(of date: Date) -> Date {
+        return calendar.date(byAdding: .day, value: 1, to: date)!
+    }
+    
+    func prevDay(of date: Date) -> Date {
+        return calendar.date(byAdding: .day, value: -1, to: date)!
+    }
+    
+    func nextMonth(of date: Date) -> Date {
+        return calendar.date(byAdding: .month, value: 1, to: date)!
+    }
+    
+    func prevMonth(of date: Date) -> Date {
+        return calendar.date(byAdding: .month, value: -1, to: date)!
+    }
+    
+    func isEqual(_ date1: Date, to: Date) -> Bool {
+        return date1.string(format: "yyyyMMdd") == to.string(format: "yyyyMMdd")
+    }
+    
+    func isEqualMonth(_ date1: Date, to: Date) -> Bool {
+        return calendar.compare(date1, to: to, toGranularity: .month).rawValue == 0
+    }
+    
     func generateMonthDays(for date: Date) -> [Date?] {
         
         var component = calendar.dateComponents([.year, .month], from: date)
