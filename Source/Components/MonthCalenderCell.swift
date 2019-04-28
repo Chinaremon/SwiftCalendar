@@ -17,8 +17,8 @@ protocol MonthGridViewDelegate: AnyObject {
 final class MonthGridView: BaseView {
 
     weak var delegate: MonthGridViewDelegate?
-
-    private let lineSpace: CGFloat = 0
+    private var dateManager: MonthDateManager!
+    private let itemHeight = Style.itemHeight
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -31,20 +31,20 @@ final class MonthGridView: BaseView {
         return it
     }()
     
-    private var dateManager: MonthDateManager!
+    override func initializeView() {
+        addSubview(collectionView)
+    }
+    
+    override func initializeConstraints() {
+        collectionView.chura.layout.equalToSuperView()
+    }
     
     func configure(manager: MonthDateManager) {
         self.dateManager = manager
     }
     
-    
     func reloadData() {
         collectionView.reloadData()
-    }
-
-    override func initializeView() {
-        addSubview(collectionView)
-        collectionView.chura.layout.equalToSuperView()
     }
 }
 
@@ -74,7 +74,7 @@ extension MonthGridView: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let size = bounds.width / CGFloat(7)
-        return CGSize(width: size, height: Style.height)
+        return CGSize(width: size, height: itemHeight)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

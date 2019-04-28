@@ -9,13 +9,16 @@
 import UIKit
 
 final class WeekDayView: BaseView {
+
+    private let _backgroundColor = Style.themeColor
+
     private let weeks = ["Sun","Mon", "Thu", "Wed", "Thu", "Fri", "Sat"]
 //     private let weeks = ["日","月", "火", "水", "木", "金", "土"]
     
     private var labels: [UILabel] = []
 
     override func initializeView() {
-        backgroundColor = Style.themeColor
+        backgroundColor = _backgroundColor
         weeks.forEach { day in
             let it = UILabel()
             it.text = day
