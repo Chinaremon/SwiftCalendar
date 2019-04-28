@@ -10,17 +10,24 @@ import Foundation
 
 
 protocol MonthDateManagerDelegate: AnyObject {
-//    func didUpdateModel(_)
+    func models()
+    func title(_ title: String)
+    func selectedDate(_ date: Date)
 }
 
 final class MonthDateManager {
     
-    var didSelectDate: ((Date) -> ())?
+    weak var bindDelegate: MonthDateManagerDelegate?
+
+    var title = "" {
+        didSet { bindDelegate?.title(title)}
+    }
 
     var selectedDate: Date = Date() {
         didSet {
+            title = selectedDate.string(format: "yyyy/MM/dd")
             hilightModel(for: selectedDate)
-            didSelectDate?(selectedDate)
+            bindDelegate?.selectedDate(selectedDate)
         }
     }
     // ViewModel
@@ -72,7 +79,7 @@ final class MonthDateManager {
     }
     //
     private let calendar = Calendar.current
-    private (set) var days: [Date?] = []
+    private var days: [Date?] = []
     private var firstDate: Date! {
         didSet {
             days = generateDays()

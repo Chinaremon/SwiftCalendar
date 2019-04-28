@@ -26,12 +26,7 @@ final class CalenderView: BaseView {
 
     private lazy var viewModel: MonthDateManager = {
         let it = MonthDateManager()
-        it.didSelectDate = { [weak self] date in
-            self?.topView.setTitle(date.string(format: "yyyy/MM/dd"))
-            self?.monthGridView.hilightDate(date)
-            self?.delegate?.didSelectDate(date)
-            self?.monthGridView.reloadData()
-        }
+        it.bindDelegate = self
         return it
     }()
     
@@ -87,4 +82,19 @@ extension CalenderView: MonthGridViewDelegate {
     }
 }
 
+extension CalenderView: MonthDateManagerDelegate {
+    
+    func title(_ title: String) {
+        topView.setTitle(title)
+    }
+    
+    func models() {
+        
+    }
+    
+    func selectedDate(_ date: Date) {
+        delegate?.didSelectDate(date)
+        monthGridView.reloadData()
+    }
+}
 
