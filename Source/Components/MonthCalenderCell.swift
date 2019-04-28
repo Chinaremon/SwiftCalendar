@@ -20,6 +20,11 @@ final class MonthGridView: BaseView {
     private var dateManager: MonthDateManager!
     private let itemHeight = Style.itemHeight
     
+    convenience init(dateManager: MonthDateManager) {
+        self.init(frame: .zero)
+        self.dateManager = dateManager
+    }
+    
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let it = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -39,10 +44,6 @@ final class MonthGridView: BaseView {
         collectionView.chura.layout.equalToSuperView()
     }
     
-    func configure(manager: MonthDateManager) {
-        self.dateManager = manager
-    }
-    
     func reloadData() {
         collectionView.reloadData()
     }
@@ -55,17 +56,12 @@ extension MonthGridView: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dateManager.days.count
+        return dateManager.models.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DayCell", for: indexPath) as! DayCell
-        if let day = dateManager.days[indexPath.row] {
-            cell.configure(model: DayCell.Model(date: day))
-        } else {
-            cell.configure(model: .init())
-        }
+        cell.configure(model: dateManager.models[indexPath.row])
         return cell
     }
 }
@@ -108,7 +104,7 @@ extension MonthGridView {
             .visibleCells
             .compactMap {  $0 as? DayCell }
             .forEach { cell in
-                cell.shouldHigiht = collectionView.indexPath(for: cell)! == indexPath
+                cell.model.shouldHilight = collectionView.indexPath(for: cell)! == indexPath
         }
     }
     

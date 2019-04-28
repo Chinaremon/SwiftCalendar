@@ -24,6 +24,8 @@ final class MonthDateManager {
         }
     }
     
+    var models: [DayCell.Model] = []
+    
     init() {
         var component = calendar.dateComponents([.year, .month], from: Date())
         component.day = 1
@@ -52,6 +54,8 @@ final class MonthDateManager {
                 days.append(nil)
             }
         }
+        
+        models = days.map { ($0 != nil) ? DayCell.Model(date: $0!) : DayCell.Model.init()  }
     }
     
     func nextMonth() {

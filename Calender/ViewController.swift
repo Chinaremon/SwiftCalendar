@@ -10,7 +10,7 @@ import UIKit
 
 
 class ViewController: UIViewController {
-
+    
     private var calenderView = CalenderView()
     
     override func viewDidLoad() {
@@ -18,15 +18,25 @@ class ViewController: UIViewController {
         
         view.backgroundColor = .white
         
-        calenderView.frame.origin.y = 100
-        calenderView.frame.size.width = view.bounds.width
-        calenderView.frame.size.height = Style.maxHeight
-        view.addSubview(calenderView)
+        let v = UIView()
+        v.backgroundColor = Style.themeColor
+         view.addSubview(calenderView)
+        view.addSubview(v)
+    
+        v.chura.layout
+            .left(0).right(0)
+            .top(0).bottom(view.safeAreaLayoutGuide.topAnchor)
+        
+        calenderView.chura.layout
+            .left(0).right(0)
+            .top(view.safeAreaLayoutGuide.topAnchor).height(Style.maxHeight)
+        
+        view.backgroundColor = UIColor.groupTableViewBackground
     }
     
     
     override func viewDidAppear(_ animated: Bool) {
-         calenderView.hoge()
+        calenderView.hoge()
     }
-
+    
 }

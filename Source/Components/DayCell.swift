@@ -33,23 +33,16 @@ final class DayCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private var model: Model! {
+    var model: Model! {
         didSet {
             label.text = model.text
-            label.textColor = model.textColor
+            label.textColor = model.shouldHilight ? .white : model.textColor
+            label.backgroundColor = model.shouldHilight ? higlghtColor : .white
         }
     }
     
     func configure(model: Model) {
-        label.backgroundColor = .white
         self.model = model
-    }
-
-    var shouldHigiht = false {
-        didSet{
-            label.backgroundColor = shouldHigiht ? higlghtColor : .white
-            label.textColor = shouldHigiht ? .white : model.textColor
-        }
     }
 }
 
@@ -59,6 +52,7 @@ extension DayCell {
     struct Model {
         var text: String = ""
         var textColor: UIColor = .black
+        var shouldHilight = false
     }
 }
 
