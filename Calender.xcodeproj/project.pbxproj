@@ -14,6 +14,14 @@
 		1BEDEA982274355F000C9C93 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1BEDEA962274355F000C9C93 /* LaunchScreen.storyboard */; };
 		1BEDEAA322743560000C9C93 /* CalenderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEDEAA222743560000C9C93 /* CalenderTests.swift */; };
 		1BEDEAAE22743560000C9C93 /* CalenderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEDEAAD22743560000C9C93 /* CalenderUITests.swift */; };
+		1BEDEAC222749585000C9C93 /* MonthDateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEDEAC122749585000C9C93 /* MonthDateManager.swift */; };
+		1BEDEAC9227544FC000C9C93 /* a.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEDEAC8227544FC000C9C93 /* a.swift */; };
+		1BEDEACB22754977000C9C93 /* CalenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEDEACA22754977000C9C93 /* CalenderView.swift */; };
+		1BEDEADC22758062000C9C93 /* WeekdayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEDEAD622758062000C9C93 /* WeekdayView.swift */; };
+		1BEDEADE22758062000C9C93 /* MonthCalenderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEDEAD822758062000C9C93 /* MonthCalenderCell.swift */; };
+		1BEDEADF22758062000C9C93 /* DayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEDEAD922758062000C9C93 /* DayCell.swift */; };
+		1BEDEAE122758062000C9C93 /* TopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEDEADB22758062000C9C93 /* TopView.swift */; };
+		1BEDEAE322758147000C9C93 /* layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEDEAE222758147000C9C93 /* layout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +55,14 @@
 		1BEDEAA922743560000C9C93 /* CalenderUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalenderUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BEDEAAD22743560000C9C93 /* CalenderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderUITests.swift; sourceTree = "<group>"; };
 		1BEDEAAF22743560000C9C93 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1BEDEAC122749585000C9C93 /* MonthDateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonthDateManager.swift; sourceTree = "<group>"; };
+		1BEDEAC8227544FC000C9C93 /* a.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = a.swift; sourceTree = "<group>"; };
+		1BEDEACA22754977000C9C93 /* CalenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderView.swift; sourceTree = "<group>"; };
+		1BEDEAD622758062000C9C93 /* WeekdayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekdayView.swift; sourceTree = "<group>"; };
+		1BEDEAD822758062000C9C93 /* MonthCalenderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonthCalenderCell.swift; sourceTree = "<group>"; };
+		1BEDEAD922758062000C9C93 /* DayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayCell.swift; sourceTree = "<group>"; };
+		1BEDEADB22758062000C9C93 /* TopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopView.swift; sourceTree = "<group>"; };
+		1BEDEAE222758147000C9C93 /* layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = layout.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,11 +113,15 @@
 		1BEDEA8C2274355E000C9C93 /* Calender */ = {
 			isa = PBXGroup;
 			children = (
+				1BEDEAE222758147000C9C93 /* layout.swift */,
+				1BEDEAC8227544FC000C9C93 /* a.swift */,
+				1BEDEAD522758062000C9C93 /* Components */,
 				1BEDEA8D2274355E000C9C93 /* AppDelegate.swift */,
 				1BEDEA8F2274355E000C9C93 /* ViewController.swift */,
-				1BEDEA912274355E000C9C93 /* Main.storyboard */,
+				1BEDEACA22754977000C9C93 /* CalenderView.swift */,
+				1BEDEAC122749585000C9C93 /* MonthDateManager.swift */,
 				1BEDEA942274355F000C9C93 /* Assets.xcassets */,
-				1BEDEA962274355F000C9C93 /* LaunchScreen.storyboard */,
+				1BEDEAC322752254000C9C93 /* New Group */,
 				1BEDEA992274355F000C9C93 /* Info.plist */,
 			);
 			path = Calender;
@@ -123,6 +143,27 @@
 				1BEDEAAF22743560000C9C93 /* Info.plist */,
 			);
 			path = CalenderUITests;
+			sourceTree = "<group>";
+		};
+		1BEDEAC322752254000C9C93 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+				1BEDEA912274355E000C9C93 /* Main.storyboard */,
+				1BEDEA962274355F000C9C93 /* LaunchScreen.storyboard */,
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		1BEDEAD522758062000C9C93 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				1BEDEADB22758062000C9C93 /* TopView.swift */,
+				1BEDEAD622758062000C9C93 /* WeekdayView.swift */,
+				1BEDEAD822758062000C9C93 /* MonthCalenderCell.swift */,
+				1BEDEAD922758062000C9C93 /* DayCell.swift */,
+			);
+			name = Components;
+			path = ../../Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -256,7 +297,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1BEDEAE122758062000C9C93 /* TopView.swift in Sources */,
+				1BEDEADC22758062000C9C93 /* WeekdayView.swift in Sources */,
 				1BEDEA902274355E000C9C93 /* ViewController.swift in Sources */,
+				1BEDEADF22758062000C9C93 /* DayCell.swift in Sources */,
+				1BEDEADE22758062000C9C93 /* MonthCalenderCell.swift in Sources */,
+				1BEDEAC9227544FC000C9C93 /* a.swift in Sources */,
+				1BEDEAC222749585000C9C93 /* MonthDateManager.swift in Sources */,
+				1BEDEACB22754977000C9C93 /* CalenderView.swift in Sources */,
+				1BEDEAE322758147000C9C93 /* layout.swift in Sources */,
 				1BEDEA8E2274355E000C9C93 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -435,6 +484,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 84SRQMJE42;
 				INFOPLIST_FILE = Calender/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -453,6 +503,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 84SRQMJE42;
 				INFOPLIST_FILE = Calender/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
