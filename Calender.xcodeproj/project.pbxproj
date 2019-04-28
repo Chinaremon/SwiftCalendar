@@ -121,8 +121,9 @@
 				1BEDEAE422759E1E000C9C93 /* Common */,
 				1BEDEA8D2274355E000C9C93 /* AppDelegate.swift */,
 				1BEDEA8F2274355E000C9C93 /* ViewController.swift */,
+				1BEDEA912274355E000C9C93 /* Main.storyboard */,
+				1BEDEA962274355F000C9C93 /* LaunchScreen.storyboard */,
 				1BEDEA942274355F000C9C93 /* Assets.xcassets */,
-				1BEDEAC322752254000C9C93 /* New Group */,
 				1BEDEA992274355F000C9C93 /* Info.plist */,
 			);
 			path = Calender;
@@ -144,15 +145,6 @@
 				1BEDEAAF22743560000C9C93 /* Info.plist */,
 			);
 			path = CalenderUITests;
-			sourceTree = "<group>";
-		};
-		1BEDEAC322752254000C9C93 /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-				1BEDEA912274355E000C9C93 /* Main.storyboard */,
-				1BEDEA962274355F000C9C93 /* LaunchScreen.storyboard */,
-			);
-			path = "New Group";
 			sourceTree = "<group>";
 		};
 		1BEDEAE422759E1E000C9C93 /* Common */ = {
