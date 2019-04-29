@@ -9,14 +9,19 @@
 import Foundation
 
 protocol MonthDateManagerDelegate: AnyObject {
-    func models()
     func title(_ title: String)
     func selectedDate(_ date: Date)
 }
 
 final class CalendarViewModel {
     
-    weak var bindDelegate: MonthDateManagerDelegate?
+    weak var bindDelegate: MonthDateManagerDelegate? {
+        didSet {
+            // 初期値を流す
+            bindDelegate?.title(title)
+            bindDelegate?.selectedDate(selectedDate)
+        }
+    }
     
     private let dateManager = DateManager()
     private var days: [Date?] = []
@@ -43,9 +48,11 @@ final class CalendarViewModel {
         models = days.map { ($0 != nil) ? DayCell.Model(date: $0!) : DayCell.Model.init()  }
     }
     
-    func setUp(day: Date) {
-        updateDayAndModels(for: day)
+    init(day: Date) {
         selectedDate = day
+        updateDayAndModels(for: day)
+        hilightModel(for: selectedDate)
+        title = selectedDate.string(format: "yyyy/MM/dd")
     }
 
     private func hilightModel(for date: Date) {

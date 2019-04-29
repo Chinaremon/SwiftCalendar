@@ -26,11 +26,7 @@ final class CalenderView: BaseView {
         return it
     }()
     
-    private lazy var viewModel: CalendarViewModel = {
-        let it = CalendarViewModel()
-        it.bindDelegate = self
-        return it
-    }()
+    private var viewModel = CalendarViewModel(day: Date())
     
     override func initializeView() {
         topView.delegate = self
@@ -38,10 +34,8 @@ final class CalenderView: BaseView {
         addSubview(weekView)
         addSubview(monthGridView)
         addSwipeGesture()
-        // NOTE: 初期化方法を考える
-        // MonthGridViewを初期化するためにviewModelを初期化している最中に
-        // MonthGridView.reloadDataを読んでしまった。
-        viewModel.setUp(day: Date())
+        // NOTE: monthGridViewを参照するのでmonthGridViewの初期化後にセット
+        viewModel.bindDelegate = self
     }
     
     override func initializeConstraints() {
