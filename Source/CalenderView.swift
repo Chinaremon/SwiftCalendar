@@ -34,8 +34,6 @@ final class CalenderView: BaseView {
         addSubview(weekView)
         addSubview(monthGridView)
         addSwipeGesture()
-        // NOTE: monthGridViewを参照するのでmonthGridViewの初期化後にセット
-        // 多分 monthGridViewにはモデルだけ参照してあげれば良い。
         viewModel.bindDelegate = self
     }
     
