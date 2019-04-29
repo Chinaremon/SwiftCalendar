@@ -35,6 +35,7 @@ final class CalenderView: BaseView {
         addSubview(monthGridView)
         addSwipeGesture()
         // NOTE: monthGridViewを参照するのでmonthGridViewの初期化後にセット
+        // 多分 monthGridViewにはモデルだけ参照してあげれば良い。
         viewModel.bindDelegate = self
     }
     
@@ -86,10 +87,6 @@ extension CalenderView: MonthDateManagerDelegate {
     
     func title(_ title: String) {
         topView.setTitle(title)
-    }
-    
-    func models() {
-        
     }
     
     func selectedDate(_ date: Date) {
