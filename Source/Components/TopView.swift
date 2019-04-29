@@ -42,7 +42,7 @@ final class TopView: BaseView {
     }()
 
     override func initializeView() {
-        backgroundColor = Style.themeColor
+        backgroundColor = CalendarStyle.themeColor
         addSubview(nextButton)
         addSubview(titleLabel)
         addSubview(backButton)

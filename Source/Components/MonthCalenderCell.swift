@@ -18,7 +18,7 @@ final class MonthGridView: BaseView {
 
     weak var delegate: MonthGridViewDelegate?
     private var viewModel: CalendarViewModel!
-    private let itemHeight = Style.itemHeight
+    private let itemHeight = CalendarStyle.itemHeight
     
     convenience init(viewModel: CalendarViewModel) {
         self.init(frame: .zero)

@@ -10,7 +10,7 @@ import UIKit
 
 final class DayCell: UICollectionViewCell {
     
-    private let higlghtColor = Style.themeColor
+    private let higlghtColor = CalendarStyle.themeColor
 
     private var label: UILabel = {
         let it = UILabel()
@@ -61,9 +61,9 @@ extension DayCell.Model {
     init(date: Date) {
         let weekday = Calendar.current.component(.weekday, from: date)
         if weekday == 1 {
-            textColor = Style.sundayColor
+            textColor = CalendarStyle.sundayColor
         } else if weekday == 7 {
-            textColor = Style.satuadayColor
+            textColor = CalendarStyle.satuadayColor
         } else {
             textColor = .gray
         }

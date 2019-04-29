@@ -10,7 +10,7 @@ import UIKit
 
 final class WeekDayView: BaseView {
 
-    private let _backgroundColor = Style.themeColor
+    private let _backgroundColor = CalendarStyle.themeColor
 
     private let weeks = ["Sun","Mon", "Thu", "Wed", "Thu", "Fri", "Sat"]
 
