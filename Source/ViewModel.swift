@@ -43,6 +43,11 @@ final class CalendarViewModel {
         models = days.map { ($0 != nil) ? DayCell.Model(date: $0!) : DayCell.Model.init()  }
     }
     
+    func setUp(day: Date) {
+        updateDayAndModels(for: day)
+        selectedDate = day
+    }
+
     private func hilightModel(for date: Date) {
         (0..<models.count).forEach { models[$0].shouldHilight = false }
         for i in 0..<models.count {
